@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  /* background-color: bisque; */
+}
+/* .user-container {
+  background-color: rgb(83, 53, 17);
+} */
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.user-btn {
+  margin: 2px;
+  width: 75px;
+  height: 25px;
+  background: rgb(100, 210, 237);
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
