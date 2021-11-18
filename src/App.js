@@ -1,11 +1,11 @@
-import "./App.css";
-import Home from "./components/HomePage/Home";
-import LogIn from "./components/LoginPage/LogIn/LogIn";
-import { Suspense } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import List from "./components/LoginPage/List-com/List2";
-import UserInfo from "./components/LoginPage/User-Info/UserInfo";
-import View from "./components/LoginPage/User-Info/View";
+import './App.css';
+import Home from './components/HomePage/Home';
+import LogIn from './components/LoginPage/LogIn/LogIn';
+import { Suspense } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import List from './components/LoginPage/List-com/List2';
+import UserInfo from './components/LoginPage/User-Info/UserInfo';
+import View from './components/LoginPage/User-Info/View';
 
 function App() {
   const dataList = [
@@ -14,27 +14,28 @@ function App() {
     //   path: "/home",
     // },
     {
-      name: "login",
-      path: "/login",
+      name: 'login',
+      path: '/login',
     },
     {
-      name: "userInfo",
-      path: "/userInfo",
+      name: 'userInfo',
+      path: '/userInfo',
     },
     {
-      name: "view user",
-      path: "/viewuser",
+      name: 'view user',
+      path: '/viewuser',
     },
   ];
-  let routes = [
+  let routes = (
     <Routes>
       {/* <Route path="/home" element={<Home />} /> */}
       <Route path="/login" element={<LogIn />} />
       <Route path="/userInfo" element={<UserInfo />} />
+      <Route path="/userInfo/:id" element={<View />} />
       <Route path="/viewuser" element={<View />} />
       <Route path="*" element={<Home />} />
-    </Routes>,
-  ];
+    </Routes>
+  );
 
   return (
     <>

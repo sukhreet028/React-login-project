@@ -6,14 +6,14 @@ import { useNavigate } from "react-router";
 const LogIn = () => {
   let printData;
   const [input, setInput] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const navigatePage = useNavigate();
   const myData = (e) => {
     const { name, value } = e.target;
-    console.log("name of input field", name);
-    console.log("value of input field ", value);
+    // console.log("name of input field", name);
+    // console.log("value of input field ", value);
     setInput((prevData) => {
       return {
         ...prevData,
@@ -26,18 +26,23 @@ const LogIn = () => {
   };
 
   const storeInput = () => {
-    Axios.get("https://reqres.in/api/login/").then((res) => {
+    if(input.email && input.password && input.email !== '' && input.password !== '') {
+      Axios.post("https://reqres.in/api/login",input).then((res) => {
       console.log(typeof res);
       console.log(res);
-      if (res.status == 200) {
+      if (res.status === 200) {
         alert("Logged in successfully");
         setInput({
-          username: "",
+          email: "",
           password: "",
         });
         navigatePage("/userInfo");
       }
     });
+    } else {
+      alert('please fill the username and password');
+    }
+    
   };
 
   //   let name = "Log In ";
@@ -47,8 +52,8 @@ const LogIn = () => {
         <input
           type="email"
           placeholder="Enter Username"
-          name="username"
-          value={input.username}
+          name="email"
+          value={input.email}
           onChange={myData}
         ></input>
         <input
@@ -60,7 +65,7 @@ const LogIn = () => {
         ></input>
       </form>
       <div>
-        <button className="mybutton" onClick={storeInput} buttonType="submit">
+        <button className="mybutton" onClick={storeInput} type="submit">
           Log In
         </button>
       </div>

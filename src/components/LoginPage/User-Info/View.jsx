@@ -1,38 +1,41 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+import { useParams } from 'react-router-dom';
 function View() {
   //   const navigatePage = useNavigate();
+
+  const { id } = useParams();
+
   const [userInput, setUserInput] = useState();
   let userData;
+
   useEffect(() => {
     myData();
   }, []);
+
   const myData = () => {
-    Axios.get("https://reqres.in/api/login").then((res) =>
+    Axios.get('https://reqres.in/api/login').then((res) =>
       setUserInput(res.data.data)
     );
   };
 
-  if (userInput) {
-    console.log(userInput);
-    userData = userInput.map((data, index) => (
-      <div className="container">
-        <div className="user-container" key={index}>
-          <div>
-            <p>User: {data.id}</p>
-            <p>Name : {data.name}</p>
-            <p>Year: {data.year}</p>
-            <p>Color: {data.color}</p>
-            <p>Pantone Value: {data.pantone_value}</p>
-          </div>
-        </div>
-      </div>
-    ));
+  if (id && userInput) {
+    userData = userInput?.find((data) => data.id == id);
   }
+
   return (
     <>
-      <div>{userData}</div>;
+      { userData && 
+        <div className="container">
+          <div>
+            <p>User: {userData.id}</p>
+            <p>Name : {userData.name}</p>
+            <p>Year: {userData.year}</p>
+            <p>Color: {userData.color}</p>
+            <p>Pantone Value: {userData.pantone_value}</p>
+          </div>
+        </div>
+      }
     </>
   );
 }
